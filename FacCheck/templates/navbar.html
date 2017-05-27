@@ -3,16 +3,24 @@
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">view_headline</i></a>
             <ul class="right hide-on-med-and-down">
+                {% if request.user.is_authenticated %}
                     <li><a class="waves-effect" href="#">Home</a></li>
                     <li><a class="waves-effect" href="#">Report Equipment</a></li>
-                    <li><a class="waves-effect" href="#">Logout</a></li>
+                    <li><a class="waves-effect" href="{% url 'signout' %}">Logout</a></li>
+                {% else %}
+                    <li><a class="waves-effect" href="{% url 'signin' %}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
 </div>
 <ul class="side-nav" id="mobile-demo">
-    <li><center>MENU</center></li>
-    <li><a class="waves-effect" href="#"><i class="material-icons">assessment</i> Home</a></li>
-    <li><a class="waves-effect" href="#"><i class="material-icons">forum</i> Report Equipment</a></li>
-    <li><a class="waves-effect" href="#"><i class="material-icons">lock</i> Logout</a></li>
+    {% if request.user.is_authenticated %}
+        <li><center>MENU</center></li>
+        <li><a class="waves-effect" href="#"><i class="material-icons">assessment</i> Home</a></li>
+        <li><a class="waves-effect" href="#"><i class="material-icons">forum</i> Report Equipment</a></li>
+        <li><a class="waves-effect" href="{% url 'signout' %}"><i class="material-icons">lock</i> Logout</a></li>
+    {% else %}
+        <li><a class="waves-effect" href="{% url 'signin' %}"><i class="material-icons">lock</i> Login</a></li>
+    {% endif %}
 </ul>

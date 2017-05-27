@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="login-page">
+        <div class="form">
+            {% if type == 1 %}
+            <form class="register-form" method="POST" action="{% url 'signup' %}">
+            {% else %}
+            <form class="register-form" method="POST" action="{% url 'signup' %}" hidden>
+            {% endif %}
+                {% csrf_token %}
+                <input type="text" placeholder="first name" name="first_name"/>
+                <input type="text" placeholder="last name" name="last_name"/>
+                <input type="text" placeholder="username" name="username"/>
+                <input type="password" placeholder="password" name="password"/>
+                <input type="text" placeholder="email address" name="email"/>
+                <button>create</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            {% if type == 1 %}
+            <form class="login-form" method="POST" action="{% url 'signin' %}" hidden>
+            {% else %}
+            <form class="login-form" method="POST" action="{% url 'signin' %}">
+            {% endif %}
+                {% csrf_token %}
+                <input type="text" placeholder="username" name="username"/>
+                <input type="password" placeholder="password" name="password"/>
+                <button>login</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+{% endblock %}
+
