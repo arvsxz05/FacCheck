@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from Profile.forms import UserInfoForm
 
 from Profile.models import UserProfile
+from Posts.models import Report
 
 # Create your views here.
 
@@ -84,3 +85,15 @@ def edit_view (request, username):
 	}
 	print(request.user.profile.avatar_url)
 	return render(request, 'editprofile.html', context=context)
+
+def view_profile (request, username):
+	if not request.user.is_authenticated :
+		return redirect('signin')
+
+	user_queried = get_object_or_404(User, username=username)
+	context = {
+		"user": user_queried,
+		"reports": Report.objects.filter(owner=request.user)
+	}
+
+	return render(request, 'viewprofile.html', context=context)

@@ -37,7 +37,13 @@
 									</div>
 								</div>
 							</span>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+							{% if request.user.profile.isAdmin %}
+								{% if report1.status_type == '0' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								{% elif report1.status_type == '1' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red disabled"><i class="material-icons">add</i></a>
+								{% endif %}
+							{% endif %}
 						</div>
 						<div class="card-content">
 							<p>{{ report1.description }}</p>
@@ -71,7 +77,13 @@
 									</div>
 								</div>
 							</span>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+							{% if request.user.profile.isAdmin %}
+								{% if report2.status_type == '0' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								{% elif report2.status_type == '1' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red disabled"><i class="material-icons">add</i></a>
+								{% endif %}
+							{% endif %}
 						</div>
 						<div class="card-content">
 							<p>{{ report2.description }}</p>
@@ -110,7 +122,13 @@
 									</div>
 								</div>
 							</span>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+							{% if request.user.profile.isAdmin %}
+								{% if report1.status_type == '0' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								{% elif report1.status_type == '1' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red disabled"><i class="material-icons">add</i></a>
+								{% endif %}
+							{% endif %}
 						</div>
 						<div class="card-content">
 							<p>{{ report1.description }}</p>
@@ -144,7 +162,13 @@
 									</div>
 								</div>
 							</span>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+							{% if request.user.profile.isAdmin %}
+								{% if report2.status_type == '0' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								{% elif report2.status_type == '1' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red disabled"><i class="material-icons">add</i></a>
+								{% endif %}
+							{% endif %}
 						</div>
 						<div class="card-content">
 							<p>{{ report2.description }}</p>
@@ -183,7 +207,13 @@
 									</div>
 								</div>
 							</span>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+							{% if request.user.profile.isAdmin %}
+								{% if report1.status_type == '0' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								{% elif report1.status_type == '1' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red disabled"><i class="material-icons">add</i></a>
+								{% endif %}
+							{% endif %}
 						</div>
 						<div class="card-content">
 							<p>{{ report1.description }}</p>
@@ -217,7 +247,13 @@
 									</div>
 								</div>
 							</span>
-							<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+							{% if request.user.profile.isAdmin %}
+								{% if report2.status_type == '0' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+								{% elif report2.status_type == '1' %}
+									<a class="btn-floating halfway-fab waves-effect waves-light red disabled"><i class="material-icons">add</i></a>
+								{% endif %}
+							{% endif %}
 						</div>
 						<div class="card-content">
 							<p>{{ report2.description }}</p>

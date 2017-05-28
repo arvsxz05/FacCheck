@@ -1,7 +1,8 @@
+{% load static %}
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper">
-            <div class="container"><a href="#" class="brand-logo">FacCheck</a>
+            <div class="container"><a href="#" class="brand-logo"><img src="{% static '/img/logo_final.png' %}"></a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">view_headline</i></a>
             <ul class="right hide-on-med-and-down">
                 {% if request.user.is_authenticated %}
@@ -19,7 +20,7 @@
     </nav>
     {% if request.user.is_authenticated %}
     <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#">View</a></li>
+        <li><a href="{% url 'view' request.user.username %}">View</a></li>
         <li><a href="{% url 'edit' request.user.username %}">Edit</a></li>
     </ul>
     {% endif %}
@@ -28,7 +29,7 @@
     {% if request.user.is_authenticated %}
         <li><center>MENU</center></li>
         <li><a class="waves-effect" href="{% url 'home' %}"><i class="material-icons">assessment</i> Home</a></li>
-        <li><a class="waves-effect" href="#"><i class="material-icons">perm_identity</i> View Profile</a></li>
+        <li><a class="waves-effect" href="{% url 'view' request.user.username %}"><i class="material-icons">perm_identity</i> View Profile</a></li>
         <li><a class="waves-effect" href="{% url 'edit' request.user.username %}"><i class="material-icons">info</i> Edit Profile</a></li>
         <li><a class="waves-effect" href="{% url 'report' %}"><i class="material-icons">forum</i> Report Equipment</a></li>
         <li><a class="waves-effect" href="{% url 'signout' %}"><i class="material-icons">lock</i> Logout</a></li>

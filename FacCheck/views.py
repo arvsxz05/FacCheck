@@ -12,17 +12,17 @@ def home(request):
 	in_progress = []
 	done = []
 
-	temp = Report.objects.filter(status_type='0')
+	temp = Report.objects.filter(status_type='0').order_by('-pub_date')
 	for x in zip(*[iter(temp)]*2):
 		unattended.append(x)
 	if len(temp)%2 == 1 :
 		unattended.append((temp[len(temp)-1], None))
-	temp = Report.objects.filter(status_type='1')
+	temp = Report.objects.filter(status_type='1').order_by('-pub_date')
 	for x in zip(*[iter(temp)]*2):
 		in_progress.append(x)
 	if len(temp)%2 == 1 :
 		in_progress.append((temp[len(temp)-1], None))
-	temp = Report.objects.filter(status_type='2')
+	temp = Report.objects.filter(status_type='2').order_by('-pub_date')
 	for x in zip(*[iter(temp)]*2):
 		done.append(x)
 	if len(temp)%2 == 1 :
@@ -34,12 +34,3 @@ def home(request):
 		'done': done,
 	}
 	return render(request, 'homepage.html', context=context)
-
-
-# def profile(request, username):
-#     user = get_object_or_404(User, username=username)
-#     context = {
-#         'user': user,
-#         'tweets': user.tweets.all().order_by('-when_created')
-#     }
-#     return render(request, 'profile.html', context=context)

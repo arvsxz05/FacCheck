@@ -4,5 +4,5 @@ from django.views.defaults import page_not_found
 from . import views
 
 urlpatterns = [
-	url(r'^make-report/$', views.report, name='report'),
+	url(r'^make-report/$', views.report, name='report')
 ]

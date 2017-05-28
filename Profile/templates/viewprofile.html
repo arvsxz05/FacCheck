@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/editprofile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <center>
+        <div class='container'>
+            <div style="background:#fdabaf">
+                <br>
+                <div class="pic2">
+                    <div class="container">
+                        <img src="{{ request.user.profile.avatar_url }}" alt="Avatar" class="image responsive-img" style="width:100%" id="img-show">
+                    </div>
+                    <br><br>
+                
+                    <div class="row">
+                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                    </div>
+                    {{ user.username }}
+                    <div>
+                        <center>{{ user.email }}</center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center><h2>Reports</h2></center>
+        <div class="container">
+            {% for report in reports %}
+            <div class="row">
+                <div class="col m6 offset-m3">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ report.reportpic_url }}">
+                            <span class="card-title">
+                                <div class="row valign-wrapper">
+                                    <div class="col s2">
+                                        <img src="{{ report.owner.profile.avatar_url }}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s10">
+                                        {{ report.report_title }}
+                                        {% if report.report_type == '0' %}
+                                            <h6 class="grey-text text-lighten-2">IT Equipments</h6>
+                                        {% elif report.report_type == '1' %}
+                                            <h6 class="grey-text text-lighten-2">Non-IT Equipments</h6>
+                                        {% elif report.report_type == '2' %}
+                                            <h6 class="grey-text text-lighten-2">Furnitures and Fixtures</h6>
+                                        {% elif report.report_type == '3' %}
+                                            <h6 class="grey-text text-lighten-2">Aircons</h6>
+                                        {% elif report.report_type == '4' %}
+                                            <h6 class="grey-text text-lighten-2">Lab Equipment</h6>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="card-content">
+                            <p>{{ report.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </center>
+{% endblock %}

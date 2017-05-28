@@ -4208,6 +4208,12 @@ nav.nav-extended .nav-content {
   line-height: normal;
 }
 
+.brand-logo img {
+    padding-top: 8px;
+    padding-bottom: 8px;  
+    height: 64px;
+}
+
 nav a {
   color: #fff;
 }
