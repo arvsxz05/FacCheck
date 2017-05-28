@@ -16,9 +16,11 @@
                 {% csrf_token %}
                 <input type="text" placeholder="first name" name="first_name"/>
                 <input type="text" placeholder="last name" name="last_name"/>
-                <input type="text" placeholder="username" name="username"/>
+                <input type="text" placeholder="username" name="username" id="username"/>
                 <input type="password" placeholder="password" name="password"/>
+                <input type="password" placeholder="confirm password" name="confirm"/>
                 <input type="text" placeholder="email address" name="email"/>
+                <p class="error" id="signup-error" type="hidden"></p>
                 <button>create</button>
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
             </form>
@@ -40,5 +42,29 @@
 {% block js %}
     {% load static %}
     <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+    <script type="text/javascript">
+        $(function(ready){
+            $("#username").change(function () {
+                var username = $(this).val();
+                console.log("here");
+
+                $.ajax({
+                    url: "{% url 'validate_username' %}",
+                    data: {
+                        'username': username
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.is_taken) {
+                            $("#signup-error").show();
+                            $("#signup-error").text('Username already exist!')
+                        } else {
+                            $("#signup-error").hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
