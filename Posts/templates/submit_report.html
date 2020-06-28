@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/editprofile.css' %}">
+    <style type="text/css">
+    	.middle {
+			transition: .5s ease;
+			opacity: 0;
+			position: absolute;
+			top: 65%;
+			left: 75%;
+			transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%)
+}
+    </style>
+{% endblock %}
+
+{% block content %}
+	{% load static %}
+	<div class="row container">
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="card">
+				<div class="card-content container">
+					<span class="card-title">Create Report</span>
+					<div class="row">
+						<div class="input-field">
+							<i class="material-icons prefix">speaker_notes</i>
+							<input id="icon_prefix" name="report_title" type="text" data-length="20">
+							<label for="icon_prefix">Report Subject</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">message</i>
+							<textarea id="textarea1" name="description" class="materialize-textarea" data-length="200"></textarea>
+							<label for="textarea1">Report Details</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="valign-wrapper">
+							<div class="col m6 s12">
+								<div class="input-field">
+									<select name="report_type">
+										<option value="" disabled selected>Choose type</option>
+										
+										{% for category_id, category_text in eq_type %}
+											<option value="{{ category_id }}">{{ category_text }}</option>
+										{% endfor %}
+									</select>
+									<label>Reported Equipment Type</label>
+								</div>
+								<br>
+								<div class="input-field">
+									<select name="location">
+										<option value="" disabled selected>Choose location</option>
+										{% for location_id, location_text in location %}
+											<option value="{{ location_id }}">{{ location_text }}</option>
+										{% endfor %}
+									</select>
+									<label>Reported Equipment Location</label>
+								</div>
+							</div>
+							<div class="col m6 s12">
+								<center><img class="responsive-img image" width="150" id="img-show" src="{% static 'img/unknown_thing.png' %}"></center>
+								<div class="middle">
+		                        	<center><div class="text" id="center-clickable">Upload Image</div></center>
+									<div style="display: none;"><input type="file" name="img_report" id="id_avatar" accept="image/*" ></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<h6 style="color:#bf0c1d;">{{ error }}</h6>
+				</div>
+				<div class="card-action container">
+					<button class="waves-effect waves-light btn"><i class="material-icons left">assessment</i>submit</button>
+	            </div>
+			</div>
+		</form>
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('input#input_text, textarea#textarea1').characterCounter();
+		});
+
+		$(document).ready(function() {
+		    $('select').material_select();
+		});
+
+        $("#center-clickable").click(function() {
+            $("#id_avatar").click();
+        });
+	</script>
+	<script type="text/javascript">
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                $('#img-show').attr('src', e.target.result);
+	            }
+
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+
+	    $("#id_avatar").change(function(){
+	        readURL(this);
+	        console.log($("#id_avatar").val())
+	    });
+    </script>
+{% endblock %}
