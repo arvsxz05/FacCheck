@@ -108,3 +108,4 @@ ENV/
 # sqlite
 *.sqlite
 *.sqlite3
+storage/
