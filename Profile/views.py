@@ -32,7 +32,6 @@ def sign_up(request):
 		user = User.objects.create_user(first_name=first_name,last_name=last_name,username=username,
                              email=email,
                              password=password)
-		userP = UserProfile.objects.create(owner=user, isAdmin=False)
 		return redirect('home')
 
 	context['type'] = 1;

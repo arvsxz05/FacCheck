@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 
 def report_upload_path(instance, filename):
     return './storage/report/report_{}_{}'.format(instance.owner.username, filename)
@@ -32,7 +32,7 @@ class Report(models.Model):
 	)
 	report_type = models.CharField(max_length=1, choices=REPORT_TYPE_CHOICES)
 	status_type = models.CharField(max_length=1, choices=STATUS_TYPE_CHOICES, default='0')
-	owner = models.ForeignKey(User, related_name='reports')
+	owner = models.ForeignKey(User, related_name='reports', on_delete=models.CASCADE)
 	description = models.TextField(max_length=200)
 	pub_date = models.DateTimeField(auto_now_add=True)
 	report_title = models.TextField(max_length=20)
